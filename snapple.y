@@ -91,18 +91,20 @@ ENDLS:
         ;       
 %%
 
-int main(int, char* argv[]) {
-        // open the file:
-        FILE *source = fopen(argv[1], "r");
-        if (!source) {
-                cout << "Can't open the file!" << endl;
-                return -1; 
+int main(int argc, char* argv[]) {
+        if (argc == 2) {
+                FILE *source = fopen(argv[1], "r");
+                if (!source) {
+                        cout << "Can't open the file!" << endl;
+                        return -1; 
+                }
+                yyin = source;
         }
-        yyin = source;
-        // lex through the input
+        // parse the input
         do {
                 yyparse();
         } while (!feof(yyin));
+
 }
 
 void yyerror(const char *s) {
