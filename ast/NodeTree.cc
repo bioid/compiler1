@@ -2,6 +2,13 @@
 
 /* Node */
 
+Node::~Node() {
+	std::list<Node*>::iterator itr = this->children.begin();
+	while (!this->children.empty()) {
+		delete *itr++;
+	}
+}
+
 void Node::addChild(Node* child) {
 	this->children.push_back(child);
 }

@@ -33,6 +33,8 @@ public:
 	Node(NodeType nodeType)
 		:nodeType(nodeType)
 	{}
+	~Node();
+	void clear();
 	void addChild(Node* child);
 };
 
