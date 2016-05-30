@@ -71,11 +71,31 @@ public:
 	}
 };
 
+class NameNode : public Node {
+public:
+	char const* name;				
+	NameNode(char const* name)
+		:Node(NAME), name(name) 
+	{}
+};
+
+class DeclNode : public Node {
+public:
+	DeclNode(ValueType type, char const* name)	
+		:Node(DECL)
+	{
+		this->addChild(new NameNode(name));
+		this->addChild(new TypeNode(type));
+	}
+};
+
+
 class NodeTree {
 public:
 	Node* root;
 	NodeTree();
 	void addOperator(Operator oper, ValueType lhs_type, ValueType rhs_type, char const* lhs_val, char const* rhs_val);
+	void addDecl(ValueType type, char const* name);
  };
 
 #endif

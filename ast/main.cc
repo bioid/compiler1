@@ -8,6 +8,7 @@ void listChildren(Node* node);
 int main() 
 {
 	NodeTree nt;
+	nt.addDecl(INTEGER, "x");
 	nt.addOperator(ADD, INTEGER, INTEGER, "1", "2");
 	
 	listChildren(nt.root);

@@ -20,3 +20,7 @@ void NodeTree::addOperator(Operator oper, ValueType lhs_type, ValueType rhs_type
 	this->root->addChild(opNode);
 }
 
+void NodeTree::addDecl(ValueType type, char const* name) {
+	this->root->addChild(new DeclNode(type, name));
+}
+
