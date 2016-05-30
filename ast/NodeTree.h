@@ -10,9 +10,9 @@ enum NodeType {
 	ASSIGN,
 	NAME,
 	VALUE,
-	NUM,
+	OPERAND,
 	TYPE,
-	OPER
+	OPERATOR
 };
 
 enum ValueType {
@@ -30,7 +30,6 @@ class Node {
 public:
 	NodeType 		nodeType;
 	std::list<Node*> 	children;
-	Node(NodeType nodeType, Node* left, Node* right); 
 	Node(NodeType nodeType)
 		:nodeType(nodeType)
 	{}
@@ -41,7 +40,7 @@ class OperatorNode : public Node {
 public:
 	Operator	oper;
 	OperatorNode(Operator oper)
-		:Node(OPER), oper(oper)
+		:Node(OPERATOR), oper(oper)
 	{}
 	
 };
@@ -56,16 +55,16 @@ public:
 
 class ValueNode : public Node {
 public:
-	int val;				// only an int for now
-	ValueNode(int value)
+	char const* val;				
+	ValueNode(char const* value)
 		:Node(VALUE), val(value) 
 	{}
 };
 
 class OperandNode : public Node {
 public:
-	OperandNode(ValueType type, int value)	// only an int for now
-		:Node(NUM)
+	OperandNode(ValueType type, char const* value)	
+		:Node(OPERAND)
 	{
 		this->addChild(new ValueNode(value));
 		this->addChild(new TypeNode(type));
@@ -76,7 +75,7 @@ class NodeTree {
 public:
 	Node* root;
 	NodeTree();
-	void addOperator(Operator oper, ValueType lhs_type, ValueType rhs_type, int lhs_val, int rhs_val);
+	void addOperator(Operator oper, ValueType lhs_type, ValueType rhs_type, char const* lhs_val, char const* rhs_val);
  };
 
 #endif
